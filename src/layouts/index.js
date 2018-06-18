@@ -15,7 +15,7 @@ class Template extends React.Component {
       rootPath = __PATH_PREFIX__ + `/`
     }
 
-    if (location.pathname === rootPath) {
+    if (location.pathname === rootPath || location.pathname.match(/[0-9]/g)) {
       header = (
         <h1
           style={{
