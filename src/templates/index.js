@@ -61,15 +61,7 @@ class IndexPage extends React.Component {
                     )
                 })}
 
-                <div className="previousLink">
-                    <NavLink test={first} url={previousUrl} text="Go to Previous Page" />
-                </div>
-                <h5>{pageCount} Pages</h5>
-                <div className="nextLink">
-                    <NavLink test={last} url={nextUrl} text="Go to Next Page" />
-                </div>
-
-                {/* <ul
+                <ul
                 style={{
                     display: 'flex',
                     flexWrap: 'wrap',
@@ -78,22 +70,22 @@ class IndexPage extends React.Component {
                     padding: 0,
                 }}
                 >
-                {previousUrl && (
+                {!pathContext.first && (
                     <li>
                         <div className="previousLink">
                             <NavLink test={first} url={previousUrl} text="← Go to Previous Page" />
                         </div>
                     </li>
                 )}
-
-                {nextUrl && (
+                <h5>{pageCount} Pages</h5>
+                {!pathContext.last && (
                     <li>
                         <div className="nextLink">
                             <NavLink test={last} url={nextUrl} text="Go to Next Page →" />
                         </div>
                     </li>
                 )}
-                </ul> */}
+                </ul>
 
             </div>
         );
