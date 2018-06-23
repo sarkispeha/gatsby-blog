@@ -1,7 +1,7 @@
 ---
 title: "Calendar - Lesson Form"
 path: "/challenge-app/calendar-lesson Form"
-date: "2018-06-16T01:01:01.001Z"
+date: "2018-06-18T01:01:01.001Z"
 ---
 
 The following interaction with the lessonCalendar component will be limited to admin users only. This will mean that the click event will have to take into account the user's authorization before registering what logic to use. I'm already realizing how much more work this will create, so time to get to it!
@@ -51,4 +51,42 @@ export default reduxForm({
 
 The above code automatically comes pre-loaded with a bunch of props, one of which is `handleSubmit()` and what will be used to hook up to the form.
 
-Next I want to limit the access to this click event for users who are only admins, this will create a need for refactoring in other areas of the application. It currently only has General Authorization to check if a user is signed in or not, I now have to give Specific Authorization parameters for users.
+_NewLessonModal_
+```javascript
+<h5>Enter Lesson Details</h5>
+<form onSubmit={this.props.handleSubmit(values => console.log(values) )}>
+    // fields
+    <button type="submit">Submit</button>
+</form>
+```
+The `handleSubmit()` will eventually want to call an ajax request to save the lesson in the db. But first it is time to get the correct form fields.
+
+```javascript
+<form onSubmit={this.props.handleSubmit() )}>
+    {/* {this.renderFields()} */}
+    <label>Student Name</label>
+    <Field component="input" name="student_name" type="text" />
+    <div className="radio-component"> 
+        <label>Duration</label>                   
+        <p>
+        <label>
+            <Field className="override-radio" component="input" name="duration" type="radio" value="AM"/>
+            <span>AM</span>
+        </label>
+        </p>
+        <p>
+        <label>
+            <Field className="override-radio" component="input" name="duration" type="radio" value="PM"/>
+            <span>PM</span>
+        </label>
+        </p>
+        <p>
+        <label>
+            <Field className="override-radio" component="input" name="duration" type="radio" value="allDay"/>
+            <span>Full Day</span>
+        </label>
+        </p>
+    </div>
+    ...
+```
+After dealing with a multitude of unexpected issues relating to `react-form` and `materialize` not playing together well, I opted to write out much of the form longhand without any nifty rendering helper. The `{this.renderFields()}` will remain as a reminder that everything is in need of a good refactor once other tasks are taken care of.

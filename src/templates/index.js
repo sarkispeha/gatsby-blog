@@ -25,15 +25,11 @@ class IndexPage extends React.Component {
         const nextUrl = (index + 1).toString();
         const siteTitle = get(this, 'props.data.site.siteMetadata.title')
         const { previous, next } = this.props.pathContext
-        
-        console.log('GROUP', group)
-        console.log('PROPS', this.props)
 
         return (
             <div>
                 <Helmet 
                     title={siteTitle}
-                    link="/blog"
                 />
                 {/* <h1>{siteTitle}</h1> */}
                 <Bio />

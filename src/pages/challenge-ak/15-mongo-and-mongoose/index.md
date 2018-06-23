@@ -32,6 +32,7 @@ const lessonSchema = new Schema({
 
 mongoose.model('lessons', lessonSchema);
 ```
+As with most models, this one is subject to change.
 
 Meanwhile... back in _server/index.js_ The app will need to use the `body-parser` module to read the POST request's body, `lessonRoutes` to gain access to the route logic, and the `Lesson` model for the mongoose schema.
 

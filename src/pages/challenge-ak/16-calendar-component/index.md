@@ -4,7 +4,7 @@ path: "/challenge-app/calendar-component"
 date: "2018-06-15T01:01:01.001Z"
 ---
 
-Switching gears back to the front-end, it's time to sketch-up the calendar component. There are many calendar libraries out there and no need to reinvent the wheel when creating my own. I chose [Big Calendar](http://intljusticemission.github.io/react-big-calendar/examples/index.html#intro), a out-of-the-box React component with a bunch of useful functionality. After saving it into my _/client_ directory (remembering that it is a front-end component after all) it was a bit of work to get it to show.
+Switching gears back to the front-end, it's time to sketch-up the calendar component. There are many calendar libraries out there and no need to reinvent the wheel when creating my own. I chose [Big Calendar](http://intljusticemission.github.io/react-big-calendar/examples/index.html#intro), an out-of-the-box React component with a bunch of useful functionality. After saving it into my _/client_ directory (remembering that it is a front-end component after all) it was a bit of work to get it to show.
 
 Starting with the component itself _LessonCalendar.js_
 ```javascript
@@ -93,7 +93,7 @@ export default function(state = [], action) {
 ```
 While the `rootReducer` is simply combining all of the reducers within Redux, the `lessonReducer` is initally setting the `lessonState` to an empty array. This allows the `LessonCalendar` component to render, and once the `fetchLessons()` async API call has finished the request, the state will be changed to an array of objects.
 
-Back in the `LessonCalendar` component, `fetchLessons` is used within the `connect` method of Redux to become accessible to the React props. The lifecycle method of `componentDidMount()` to initiates the action.
+Back in the `LessonCalendar` component, `fetchLessons` is used within the `connect` method of Redux to become accessible to the React props. The lifecycle method of `componentDidMount()` initiates the action.
 ```javascript
 import { fetchLessons } from '../actions';
 
