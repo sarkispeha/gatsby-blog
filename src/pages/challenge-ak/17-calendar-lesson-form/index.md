@@ -14,7 +14,8 @@ It took me the entire day to figure out that React v16.4 was not compatible with
 
 In the end, I went with `react-modal-construction-kit` as it looked very minimal and easily customizible with the materialize-css... and it worked without all the headache!
 
-The modal will be controlled by the props passed to it from the parent component and these props will set the Modal component's local state. The lifecycle method `componentDidUpdate()` is used.
+The modal will be controlled by the props passed to it from the parent component and these props will set the Modal component's local state. I had previously used the lifecycle method `componentDidUpdate()`, but noticed that this depended on the child component setting its own state by passing information back to the parent component and created some strange behavior, along with inefficient rendering. 
+
 ```javascript
 componentDidUpdate(prevProps) {
     if (this.props.isModalVisible !== prevProps.isModalVisible) {
@@ -24,9 +25,33 @@ componentDidUpdate(prevProps) {
     }
 }
 ```
-The question might be asked as to why I don't use the prop itself to control the show and hide of the modal. To keep things semantic I prefer to attach this to the component's state as to show/hide a modal seems intrinsically more of a state-driven process than prop-driven.
- The specific calendar information passed down to it
 
+Within _LessonCalendar_ I created a simple `close()` method for controlling modal behavior.
+```javascript
+closeModal = () => {
+    this.setState({
+        isNewLessonModalVisible : false
+    })
+}
+```
+Then passed this to the child component.
+``` javascript
+<NewLessonModal
+    closeModal={this.closeModal}
+>
+</NewLessonModal>
+```
+
+And within _NewLessonModal_ 
+```javascript
+componentWillReceiveProps(nextProps) {
+    this.setState({ isModalVisible: nextProps.isModalVisible });  
+}
+```
+The above refactoring of code skirted a problem with creating an anti-pattern. Setting the `isModalVisible` initially within the constructor caused the child component to only get access to the value the first time it was rendered. This meant that if the component was re-rendered, it would still hold on to the value of the initial constructor even if the re-rendered component had a different value for the prop. It is necessary to set the `isModalVisible` state to `false` upon rendering the modal component so that it does not show, and for that reason `componentWillReceiveProps()` is necessary.
+
+A bit of a headache for essentially nothing more than a toggle effect, but sometimes this is the game we play as developers!
+___
 
 I will use redux-form
 redux-form comes with its own reducer that can then be hooked up to the store.
