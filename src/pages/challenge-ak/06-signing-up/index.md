@@ -6,7 +6,12 @@ date: "2018-06-05T01:01:01.001Z"
 
 The SignUpPage component itself is really just a container for the SignupForm. SignUpPage is a functional component without a need for a state at the moment.
 
-The SignUpForm component will be designated as a class component as it will eventually have to manage the React local state and will need the `this` keyword. `super()` is called rather than simply `super(props)` in the constructor because `this.props` won't eventually be called within the constructor.
+The SignUpForm component will be designated as a class component as it will eventually have to manage the React local state and will need the `this` keyword. `super()` is called rather than simply `super(props)` in the constructor because `this.props` won't eventually be called within the constructor. That being said, I have found that if `super(props)` is _not_ called but a prop is set indirectly within the constructor, there will be errors in compiling. As such, the below statement needs `props`.
+```javascript
+this.state = {
+  isModalVisible: this.props.isModalVisible
+}
+```
 
 The SignUpLink is a placeholder for now as obviously a user needs to Sign Up before being able to sign in.
 
