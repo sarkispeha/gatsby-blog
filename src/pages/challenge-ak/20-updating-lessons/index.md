@@ -136,4 +136,4 @@ export const updateLesson = (lessonDto, lessonId) => async () => {
 }
 ```
 
-Upon finishing this work, I'm beginning to realize that the files are starting to lose some of their semantic worth. _NewLessonModal.js_ really isn't for a new lesson anymore, but more of an admin specific modal. I believe a good next step is to go back and tidy up some of these loose ends.
+Upon finishing this work, I'm beginning to realize that the files are starting to lose some of their semantic worth. _NewLessonModal.js_ really isn't for a new lesson anymore, but more of an admin specific modal. All references to the component _NewLessonModal_ will now be _AdminLessonModal_.
